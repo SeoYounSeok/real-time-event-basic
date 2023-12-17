@@ -1,7 +1,7 @@
 package com.example.api.service;
 
-import com.example.api.domain.Coupon;
 import com.example.api.producer.CouponCreateProducer;
+import com.example.api.repository.AppliedUserRepository;
 import com.example.api.repository.CouponCountRepository;
 import com.example.api.repository.CouponRepository;
 import org.springframework.stereotype.Service;
@@ -15,13 +15,21 @@ public class ApplyService {
 
     private final CouponCreateProducer couponCreateProducer;
 
-    public ApplyService(CouponCreateProducer couponCreateProducer, CouponRepository couponRepository, CouponCountRepository couponCountRepository) {
+    private final AppliedUserRepository appliedUserRepository;
+
+    public ApplyService(CouponCreateProducer couponCreateProducer, CouponRepository couponRepository, CouponCountRepository couponCountRepository, AppliedUserRepository appliedUserRepository) {
         this.couponCreateProducer = couponCreateProducer;
         this.couponRepository = couponRepository;
         this.couponCountRepository = couponCountRepository;
+        this.appliedUserRepository = appliedUserRepository;
     }
 
     public void apply(Long userId) {
+        Long apply = appliedUserRepository.add(userId);
+
+        if(apply != 1) {
+            return ;
+        }
 
         Long count = couponCountRepository.increment();
 
