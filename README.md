@@ -20,6 +20,60 @@
 <br>
 <br>
 
+## Guide
+#### docker 설치
+```
+brew install docker
+brew link docker
+
+docker version
+```
+#### docker mysql 실행 명령어
+```
+docker pull mysql
+docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 --name mysql mysql
+docker ps
+docker exec -it mysql bash
+```
+#### mysql 명령어
+```
+mysql -u root -p
+create database coupon_example;
+use coupon_example;
+```
+#### redis 설치
+```
+docker pull redis
+
+docker run --name myredis -d -p 6379:6379 redis
+```
+#### redis 실행
+```
+docker exec -it <도커 Redis 컨테이너 아이디> redis-cli
+```
+#### redis 초기화
+```
+flushall
+```
+#### kafka 실행
+```
+docker-compose up -d
+```
+#### kafka 종료
+```
+docker-compose down
+```
+#### kafka topic 생성
+```
+docker exec -it kafka kafka-topics.sh --bootstrap-server localhost:9092 --create --topic coupon_create
+```
+#### kafka Consumer 실행
+```
+docker exec -it kafka kafka-console-consumer.sh --topic coupon_create --bootstrap-server localhost:9092 --key-deserializer "org.apache.kafka.common.serialization.StringDeserializer" --value-deserializer "org.apache.kafka.common.serialization.LongDeserializer"
+```
+<br>
+<br>
+
 ## Entity Relationship Diagram
 ![image](https://github.com/SeoYounSeok/real-time-event-basic/assets/43161245/76f56e86-5668-4770-80a0-0cff4e87e3ec)
 <br>
