@@ -41,13 +41,13 @@ mysql -u root -p
 create database coupon_example;
 use coupon_example;
 ```
-#### redis 설치
+#### redis 설치 및 실행
 ```
 docker pull redis
 
 docker run --name myredis -d -p 6379:6379 redis
 ```
-#### redis 실행
+#### redis cli 접근 
 ```
 docker exec -it <도커 Redis 컨테이너 아이디> redis-cli
 ```
@@ -80,5 +80,5 @@ docker exec -it kafka kafka-console-consumer.sh --topic coupon_create --bootstra
 <br>
 
 ## Structure
-![image](https://github.com/SeoYounSeok/real-time-event-basic/assets/43161245/901005e1-0ef3-48dc-a112-07c40e102aeb)
+![image](https://github.com/SeoYounSeok/real-time-event-basic/assets/43161245/48851075-2eff-45cd-81dc-cd65a645e408)
 <br>
